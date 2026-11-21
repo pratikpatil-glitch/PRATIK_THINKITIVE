@@ -1,4 +1,7 @@
 // Strict Mode tells JavaScript to follow stricter rules and catch certain coding mistakes.
+/* 
+Its main purposes are: Catch coding mistakes. Stop some confusing JavaScript behaviors.
+*/
 
 "use strict";
 
