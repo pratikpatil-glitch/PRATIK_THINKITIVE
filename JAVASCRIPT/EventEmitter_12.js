@@ -45,3 +45,6 @@ function greet() {
 event.on("hello", greet);
 event.off("hello", greet); // Removes listener
 event.emit("hello");      // No output
+
+let arr = [1,2,3,4]
+arr.__proto__
