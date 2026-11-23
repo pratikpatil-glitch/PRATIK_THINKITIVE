@@ -1,0 +1,53 @@
+<!-- 
+- Event Delegation: 
+    - Event Delegation is a technique where we attach one event
+    listener to a parent element instead of attaching separate event listeners to
+    every child element. 
+
+    - Instead of adding click events to 10 buttons
+    individually, we add one click event to their common parent. - example : 1
+    Teacher (parent) -> 100 students (child)  
+
+- Event Bubbling:
+   - Event Bubbling means an event starts from the element where it happened and travels upward through its parent elements.
+
+   - event.target: event.target tells us which element actually triggered the event.
+   - event.currentTarget: event.currentTarget refers to the element on which the event listener is registered.
+
+- Event Capturing: Event Capturing means when an event happens on a child element, JavaScript first checks the outermost parent and then moves towards the target element.
+      - Purpose: To handle an event from parent to child.
+
+- closest() Method: The closest() method finds the nearest matching element, starting from the current element and moving upward through its ancestors.
+-->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Delegation</title>
+  </head>
+  <body>
+    <div id="container">
+      <button>Apple</button>
+      <button>Banana</button>
+      <button>watermeloan</button>
+    </div>
+    <script>
+      // Event Delegation:
+      let parentContainer = document.querySelector("#container");
+      parentContainer.addEventListener("click", (event) => {
+        console.log(event.target.textContent);
+      });
+
+      // Event Capturing
+      document.querySelector("#container").addEventListener(
+        "click",
+        (event) => {
+          console.log("Parent Capturing");
+        },
+        true,
+      );
+    </script>
+  </body>
+</html>
