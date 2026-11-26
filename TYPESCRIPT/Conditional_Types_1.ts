@@ -13,7 +13,7 @@
         - syntax: 
             type Result = SomeType extends OtherType ? TrueType : FalseType;
 
-            - infer Keyword: infer allows TypeScript to automatically extract a type from another type.
+            - infer Keyword: infer is used to automatically extract or find a type from another type.
                     When to use:
                     - To extract a function's return type.
                     - To extract array element types.

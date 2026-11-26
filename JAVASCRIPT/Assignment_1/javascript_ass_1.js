@@ -228,3 +228,133 @@ function genrateId() {
 const gen = genrateId();
 console.log(gen()); // ID_1
 console.log(gen()); // ID_2
+
+//10. Use call(), apply() and bind() to calculate salary.
+const salaryCalculator = {
+  calcukateSalary: function (bonus, allowance) {
+    return this.salary + bonus + allowance;
+  },
+};
+
+const emp1 = {
+  name: "krishna",
+  salary: 5000,
+};
+
+//call
+const callSalary = salaryCalculator.calcukateSalary.call(emp1, 5000, 2000);
+console.log("call salary: ", callSalary);
+
+// Apply
+const applySalary = salaryCalculator.calcukateSalary.apply(emp1, [5000, 2000]);
+console.log("Apply salary: ", applySalary);
+
+//bind
+const bindSalary = salaryCalculator.calcukateSalary.bind(emp1, 5000, 2000);
+console.log("Bind salary: ", bindSalary);
+
+// 11. Use Map to store employee records.
+const empRecords = new Map();
+employees.forEach((emp) => {
+  empRecords.set(emp.id, emp);
+});
+console.log("employee data: ", empRecords);
+console.log("GET: ", empRecords.get(1));
+
+//12. Use Set to maintain unique employee skills.
+const empSkills = new Set();
+empSkills.forEach((emp) => {
+  emp.skills.forEach((skills) => {
+    empSkills.add(skills);
+  });
+});
+console.log("Is skill", empSkills.has("javascript"));
+console.log("Skills: ", empSkills);
+
+//13. Implement Promise-based employee fetching.
+function fetchEmp() {
+  return new Promise((resolve, reject) => {
+    if (employees.length > 0) {
+      resolve(employees);
+    } else {
+      reject("no Emp found");
+    }
+  });
+}
+
+fetchEmp()
+  .then((data) => {
+    console.log("promises data: ", data);
+  })
+  .catch((error) => {
+    console.log("Error: ", error);
+  });
+
+// 14. Use async/await and error handling.
+async function getEmp() {
+  try {
+    const data = await fetchEmp();
+    console.log("\n try catch data: ", data);
+  } catch (error) {
+    console.log("Error Fteching Emp: ", error);
+  }
+}
+getEmp();
+
+// 15. Implement debouncing for employee search.
+function debounce(callback, delay) {
+  let timer;
+
+  return function (...args) {
+    console.log("argumeents: ", ...args);
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      callback(...args);
+    }, delay);
+  };
+}
+
+function empSearch(values) {
+  const result = employees.filter((emp) =>
+    emp.name.toLowerCase().includes(values.toLowerCase()),
+  );
+
+  console.log("Search result: ", result);
+}
+
+const debouncedSearch = debounce(empSearch, 1000);
+debouncedSearch("k");
+debouncedSearch("kr");
+debouncedSearch("kri");
+debouncedSearch("kris");
+debouncedSearch("krish");
+debouncedSearch("krishn");
+debouncedSearch("krishna");
+
+// 16. Implement throttling for report generation.
+function throttle(callback, delay) {
+  let lastCall = 0;
+
+  return function (...args) {
+    const currentTime = Date.now();
+
+    if (currentTime - lastCall >= delay) {
+      lastCall = currentTime;
+      callback(...args);
+    }
+  };
+}
+
+function genrateReport() {
+  console.log("Total Employees:", employees.length);
+  const total = employees.reduce((sum, emp) => {
+    return sum + emp.salary;
+  }, 0);
+  console.log("Total slary is: ", total);
+}
+
+const throttleReport = throttle(genrateReport, 2000);
+throttleReport();
+throttleReport();
+throttleReport();
+throttleReport();
